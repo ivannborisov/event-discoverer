@@ -2,9 +2,9 @@ const EventService = require('../services/events-service');
 
 async function getEvents (req, res) {
     try {
-        const reqBody = req.body;
+        //const reqBody = req.body;
 
-        const events = EventService.getEvents();
+        const events = await EventService.getEvents();
 
         res.json(events);
 

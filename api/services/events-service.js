@@ -1,9 +1,10 @@
+const Event = require('../models/Event');
 
-function getEvents () {
+async function getEvents () {
+    const events = await Event.find({});
 
-    return [];
+    return events;
 }
-
 
 module.exports = {
     getEvents
