@@ -1,4 +1,15 @@
-.event {
+.event-container {
     padding: 40px;
-    border:1px solid red;
+    width: 250px;
+    margin: 5px;
+    float:left;
+}
+
+.event-container span {
+    font-style: italic;
+    font-size: 14px;
+}
+
+.additional-info {
+    font-size: 15px;
 }

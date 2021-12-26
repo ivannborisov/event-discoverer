@@ -5,16 +5,12 @@ import './Search.css';
 
 const Search = () => {
     const dispatch = useDispatch();
-   // const [inputValue, setInputValue] = useState('');
     
     const handleChange = (event) => {
-        console.log(event.target.value)
-     //   setInputValue(event.target.value);
         
         dispatch(typing({
             query: event.target.value
         }))
-        
     }
    
     return (
