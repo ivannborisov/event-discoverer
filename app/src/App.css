@@ -1,15 +1,16 @@
-.App {
-  text-align: center;
+.app-header {
+  background: #BDBDBD;
+  color:white;
+  padding: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app-search-wrapper {
+  background: #E0E0E0;
+  padding:60px 0px 60px 0px;
+  margin-bottom: 30px;
 }
 
+.app-content {
+  width: 1000px;
+  margin:  auto;
+}

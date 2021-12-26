@@ -1,29 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { typing } from "../../reducers/search"
+import './Search.css';
 
-class Search extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {value: ''};
+const Search = () => {
+    const dispatch = useDispatch();
+   // const [inputValue, setInputValue] = useState('');
+    
+    const handleChange = (event) => {
+        console.log(event.target.value)
+     //   setInputValue(event.target.value);
         
-        this.handleChange = this.handleChange.bind(this);
+        dispatch(typing({
+            query: event.target.value
+        }))
+        
     }
-
-    handleChange(event) {
-        this.setState({value: event.target.value});
-        console.log(this.state.value)
-    }
-
-    render() {
-        return (
+   
+    return (
+        <div className="search">
             <form>
                 <label>
                     Search:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <input type="text"  onChange={handleChange} />
                 </label>
             </form>
-        );
-    }
+        </div>
+    );
+    
 }
 
 export default Search;

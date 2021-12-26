@@ -1,53 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect  } from 'react';
 import Event from './Event/Event';
+import { useSelector } from 'react-redux';
+import './Events.css';
 
 const API_URL = 'http://localhost:5000'
 
-class Events extends React.Component {
+const Events = () => {
+    const searchQuery = useSelector((state) => {
+        return state.search.value;
+    });
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            events: [
-               
-            ]
+    const [events, setEvents] = useState([]);
+
+    useEffect( () => {
+        fetchEvents()
+    },[searchQuery]);
+
+
+    const fetchEvents = () => {
+
+        let url = API_URL + '/api/events';
+
+        if (searchQuery.query) {
+            url += `?search=${searchQuery.query}`;
         }
+
+        return fetch(url)
+            .then(res => res.json())
+            .then(
+                (result) => {    
+                    setEvents(result)
+                },
+                (error) => {
+                    console.log(error)
+                    setEvents([]);
+                }
+            );
     }
-
-    componentDidMount() {
-        
-        fetch(API_URL + '/api/events')
-          .then(res => res.json())
-          .then(
-            (result) => {
-                
-              this.setState({
-                events: result
-              });
-              console.log(this.state)
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-              console.log(error)
-              this.setState({
-                events: []
-              });
-            }
-          )
-      }
-
-   
-    render() {
-        return (
-            <div>
-                {this.state.events.map((event, i) => 
-                    <div key={i}> <Event title={event.title} description={event.description}/> </div>
-                )}
+      
+    return (
+        <div className="eventsWrapper">  
+            <div className="eventsContainer">
+                    {events.map((event, i) => 
+                        <div key={i}>
+                            <Event event={event}/> 
+                        </div>
+                    )}
             </div>
-        );
-    }
+        </div>
+    )
+
+
 }
+
+
 
 export default Events;
